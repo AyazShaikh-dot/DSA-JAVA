@@ -2,7 +2,7 @@ package Mathematics;
 
 import java.util.Scanner;
 
-//  Checking A number is PAllindrome or not.
+// Checking A number is PAllindrome or not.
 // Example 989 reverse 989 (989==989) pallindrome
 // 678 reverse 876 (678 !=876)not pallindrome
 public class checkPalindrome {
