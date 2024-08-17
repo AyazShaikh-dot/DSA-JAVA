@@ -19,6 +19,7 @@ public class factorial {
 
 //  Get Factorial of number using loop
 //  Time complexity O(N) Space Complexity O(1)
+//  Exaplme 5 factorial is => 5 * 4 * 3 * 2 * 1 = 120
 
 static int factorialUsingLoop(int n){
  int res=1;
