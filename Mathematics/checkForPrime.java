@@ -9,7 +9,7 @@ public class checkForPrime {
         System.out.println("Enter A Numbers to check Prime or not");
          int a = sc.nextInt();
 
-         boolean ans1=checkForPrime(a);
+         boolean ans1=checkPrime(a);
          boolean ans2=efficientSoltion(a);
          boolean ans3=bestSol(a);
          
@@ -20,7 +20,7 @@ public class checkForPrime {
     }
 
     // Naive solution
-    static boolean checkForPrime(int n){
+    public static boolean checkPrime(int n){
         for(int i=2;i<n;i++){
             if(n%i==0)
             return false;
@@ -39,7 +39,7 @@ public class checkForPrime {
     }
 
     // Best Solution
-    static boolean bestSol(int n){
+    public static boolean bestSol(int n){
         if(n%2==0 || n%3==0) return false;
 
         for(int i=5;i*i<=n;i+=6){
