@@ -8,6 +8,7 @@ public class lcm extends euclideanAlgo{
         System.out.println("Enter A Numbers to check LCM");
          int a = sc.nextInt();
          int b = sc.nextInt();
+         sc.close();
          
          int ans = leastCommonFactor(a, b);
          int ans1=usingGcd(a, b);

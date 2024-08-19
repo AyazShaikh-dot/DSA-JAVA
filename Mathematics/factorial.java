@@ -6,6 +6,7 @@ public class factorial {
         Scanner sc= new Scanner(System.in);
         System.out.println("Enter A Number To Check Pallindrome");
         int N = sc.nextInt();
+        sc.close();
 
         int ans1 = factorialUsingLoop(N);
         int ans2 = factorialRecursion(N);

@@ -12,6 +12,7 @@ public class countDigit {
         Scanner sc= new Scanner(System.in);
         System.out.println("Enter A Number");
         int N = sc.nextInt();
+        sc.close();
          System.out.println("Number of Digits in" + N +" " + " is "+countDigits(N));
     }
     static int countDigits(int N){

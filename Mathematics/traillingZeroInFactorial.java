@@ -6,6 +6,7 @@ public class traillingZeroInFactorial {
         Scanner sc= new Scanner(System.in);
         System.out.println("Enter A Number");
         int N = sc.nextInt();
+        sc.close();
         int ans = traillingZeroes(N);
          System.out.println("Trailling zeroes in Factorial of " + N +" " + " is "+ans);
     }

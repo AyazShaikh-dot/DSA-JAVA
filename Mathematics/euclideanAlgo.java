@@ -9,6 +9,7 @@ public class euclideanAlgo {
           System.out.println("Enter A Numbers to check GCD");
            int a = sc.nextInt();
            int b = sc.nextInt();
+           sc.close();
 
         //    int ans = gcd(a,b);
 

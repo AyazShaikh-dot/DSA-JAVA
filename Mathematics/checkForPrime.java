@@ -8,6 +8,7 @@ public class checkForPrime {
         Scanner sc= new Scanner(System.in);
         System.out.println("Enter A Numbers to check Prime or not");
          int a = sc.nextInt();
+         sc.close();
 
          boolean ans1=checkPrime(a);
          boolean ans2=efficientSoltion(a);

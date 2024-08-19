@@ -11,6 +11,7 @@ public class checkPalindrome {
         Scanner sc= new Scanner(System.in);
         System.out.println("Enter A Number To Check Pallindrome");
         int N = sc.nextInt();
+        sc.close();
          if(check(N)){
             System.out.println("It is a PALLINDROME");
          }
