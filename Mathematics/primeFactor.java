@@ -6,7 +6,7 @@ public class primeFactor extends checkForPrime {
     public static void main(String[] args) {
         printPrimefacor(315);
         System.out.println();
-        efficientSoltion(315);
+        efficientSoltionPrint(315);
     }
 
 
@@ -23,7 +23,7 @@ public class primeFactor extends checkForPrime {
         }
     }
 
-    static void efficientSoltion(int n){
+    static void efficientSoltionPrint(int n){
         while(n%2==0){
             System.out.print(2+" ");
             n=n/2;
