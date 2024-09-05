@@ -22,10 +22,9 @@ public class SubArrayWithZeroSum {
         for(int i=1;i<arr.length;i++){
             // Edge case if prifix sum itself zero;
             
-            if(prefixSum==0) return true;
-            prefixSum+=arr[i];
-           
+            if(prefixSum==0) return true;   
             if(hs.contains(prefixSum)) return true;
+            prefixSum+=arr[i];
             hs.add(prefixSum);
         }
         if(prefixSum==0) return true;
