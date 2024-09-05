@@ -1,19 +1,23 @@
 package LinkedList;
 
-public class SimpleLinkedList {
-    // Creating Node 
-    int value;
-    SimpleLinkedList next;
-    // Constructor
-    SimpleLinkedList(int x){
-        value =x;
-        next =null;
+// Creating Node of Linked List 
+// Self Refentials 
+class Node{
+    int data ;
+    Node next;
+    // Constructor of linked List
+    Node(int x){
+        data = x;
+        next=null;
     }
+}
+public class SimpleLinkedList {
+
     public static void main(String[] args) {
         
-        SimpleLinkedList head = new SimpleLinkedList(10);
-        SimpleLinkedList temp1 = new SimpleLinkedList(30);
-        SimpleLinkedList temp2 = new SimpleLinkedList(90);
+        Node head = new Node(10);
+        Node temp1 = new Node(30);
+        Node temp2 = new Node(90);
 
         head.next =temp1;
         temp1.next = temp2;
