@@ -23,11 +23,11 @@ public class SimpleLinkedList {
         temp1.next = temp2;
 
         //  Traversing Linked List
-        SimpleLinkedList tem = head;
+        Node curr = head;
 
-        while (tem!=null) {
-            System.out.println(tem.value);
-            tem= tem.next;
+        while (curr!=null) {
+            System.out.println(curr.data);
+            curr= curr.next;
         }
         
     }
