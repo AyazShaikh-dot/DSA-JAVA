@@ -33,8 +33,6 @@ public class InsertionInBeginning {
 
         Node curr = new Node(x);
 
-        if(head == null) return curr;
-
         curr.next =head;
 
         return curr;
