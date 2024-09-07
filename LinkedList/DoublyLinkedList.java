@@ -26,9 +26,11 @@ public class DoublyLinkedList {
 
       DoublyNode currHead =  insertAtBeginningInDoublyLinkedList(newNode, head);
 
+      insertAtEndInDoublyLinkedList(new DoublyNode(123321), currHead);
+
         traversingLinkedList(currHead);
 
-        traversingLinkedListBackward(temp2);
+        // traversingLinkedListBackward(temp2);
     }
 
     public static void traversingLinkedList(DoublyNode head){
@@ -58,5 +60,19 @@ public class DoublyLinkedList {
         head.prev = nodeToBeInsert;
 
         return nodeToBeInsert;
+    }
+
+    public static void insertAtEndInDoublyLinkedList(DoublyNode nodeToBeInsert , DoublyNode head){
+
+        if(head == null){
+            head= nodeToBeInsert;
+        }
+
+        DoublyNode curr = head;
+        while (curr.next !=null) {
+            curr= curr.next;
+        }
+        curr.next = nodeToBeInsert;
+        nodeToBeInsert.prev = curr;
     }
 }
