@@ -20,9 +20,24 @@ public class DoublyLinkedList {
         temp1.next= temp2;
         temp1.prev = head;
         temp2.prev= temp1;
+
+        DoublyNode newNode = new DoublyNode(5432);
         // System.out.println(head.prev);
 
+      DoublyNode currHead =  insertAtBeginningInDoublyLinkedList(newNode, head);
+
+        traversingLinkedList(currHead);
+
         traversingLinkedListBackward(temp2);
+    }
+
+    public static void traversingLinkedList(DoublyNode head){
+
+        DoublyNode currNode = head;
+        while (currNode != null) {
+            System.out.println(currNode.data);
+            currNode= currNode.next;
+        }
     }
 
     public static void traversingLinkedListBackward(DoublyNode lastNode){
@@ -32,5 +47,16 @@ public class DoublyLinkedList {
             System.out.println(currNode.data);
             currNode= currNode.prev;
         }
+    }
+
+    public static DoublyNode insertAtBeginningInDoublyLinkedList(DoublyNode nodeToBeInsert , DoublyNode head){
+
+        if(head == null){
+            return nodeToBeInsert;
+        }
+        nodeToBeInsert.next= head;
+        head.prev = nodeToBeInsert;
+
+        return nodeToBeInsert;
     }
 }
