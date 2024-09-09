@@ -21,16 +21,19 @@ public class DoublyLinkedList {
         temp1.prev = head;
         temp2.prev= temp1;
 
-        DoublyNode newNode = new DoublyNode(5432);
+        // DoublyNode newNode = new DoublyNode(5432);
         // System.out.println(head.prev);
 
-      DoublyNode currHead =  insertAtBeginningInDoublyLinkedList(newNode, head);
+    //   DoublyNode currHead =  insertAtBeginningInDoublyLinkedList(newNode, head);
 
-      insertAtEndInDoublyLinkedList(new DoublyNode(123321), currHead);
+    //   insertAtEndInDoublyLinkedList(new DoublyNode(123321), currHead);
+    //   currHead =reverseDoublyLinkedList(currHead);
 
-        traversingLinkedList(currHead);
+    head = reversDoublyLinkedListEfficiently(head);
 
-        // traversingLinkedListBackward(temp2);
+        traversingLinkedList(head);
+
+        // traversingLinkedListBackward(temp2.next);
     }
 
     public static void traversingLinkedList(DoublyNode head){
@@ -74,5 +77,50 @@ public class DoublyLinkedList {
         }
         curr.next = nodeToBeInsert;
         nodeToBeInsert.prev = curr;
+    }
+
+    // NAive Solution
+    public static DoublyNode reverseDoublyLinkedList(DoublyNode head){
+
+        if(head == null || head.next ==null)
+        return head;
+
+        DoublyNode currNode = head;
+        while (currNode.next !=null) {
+            currNode = currNode.next;
+        }
+
+        DoublyNode lastNode = currNode;
+        DoublyNode currHead =head;
+
+        while (head != lastNode) {
+            int temp = lastNode.data;
+            lastNode.data = currHead.data;
+            currHead.data =temp;
+
+            currHead = currHead.next;
+            lastNode = lastNode.prev;
+        }
+
+        return head;
+    }
+
+    // Efficient Solution 
+
+    public static DoublyNode reversDoublyLinkedListEfficiently( DoublyNode head){
+
+        if(head == null || head.next==null) return head;
+
+        DoublyNode currNode = head;
+        DoublyNode prev = null;
+
+        while ( currNode != null) {
+            prev = currNode.prev;
+            currNode.prev= currNode.next;
+            currNode.next = prev;
+
+            currNode = currNode.prev;
+        }
+        return prev.prev;
     }
 }
