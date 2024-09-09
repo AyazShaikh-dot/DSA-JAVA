@@ -24,13 +24,17 @@ public class DoublyLinkedList {
         // DoublyNode newNode = new DoublyNode(5432);
         // System.out.println(head.prev);
 
-    //   DoublyNode currHead =  insertAtBeginningInDoublyLinkedList(newNode, head);
+        //   DoublyNode currHead =  insertAtBeginningInDoublyLinkedList(newNode, head);
 
-    //   insertAtEndInDoublyLinkedList(new DoublyNode(123321), currHead);
-    //   currHead =reverseDoublyLinkedList(currHead);
+        //   insertAtEndInDoublyLinkedList(new DoublyNode(123321), currHead);
+        //   currHead =reverseDoublyLinkedList(currHead);
+    
+        // head = reversDoublyLinkedListEfficiently(head);
 
-    head = reversDoublyLinkedListEfficiently(head);
 
+        // DoublyNode ans = deleteHead(head);
+
+        head = deleteLastNode(head);
         traversingLinkedList(head);
 
         // traversingLinkedListBackward(temp2.next);
@@ -122,5 +126,32 @@ public class DoublyLinkedList {
             currNode = currNode.prev;
         }
         return prev.prev;
+    }
+
+    //  Delete HEad Of the Doubly Linked List
+    public static DoublyNode deleteHead(DoublyNode head){
+        if(head == null || head.next == null) 
+        return null;
+
+        head= head.next;
+        head.prev = null;
+        return head;
+
+    }
+
+    // Delete Last Node of Doubly Linked List
+
+    public static DoublyNode deleteLastNode(DoublyNode head){
+
+        if(head == null || head.next ==null)
+        return null;
+
+        DoublyNode curr = head;
+        while (curr.next != null) {
+            curr=curr.next;
+        }
+        curr.prev.next= null;
+
+        return head;
     }
 }
