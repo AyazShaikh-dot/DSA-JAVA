@@ -12,8 +12,8 @@ public class CircularLinkedList {
         head.next.next.next = new Node(189);
         head.next.next.next.next=head;
 
-        head.next=head;
-        head=null;
+        // head.next=head;
+        // head=null;
         
         // head = insertAtBeginnig(head, 900);
 
@@ -110,6 +110,20 @@ public class CircularLinkedList {
 
         return newNode;
         
+    }
+
+    //  Naive Solution
+    public static Node naiveDeleteHead(Node head){
+        if(head == null || head.next==head){
+            return null;
+        }
+
+        Node curr= head;
+        while (curr.next != head) {
+            curr= curr.next;
+        }
+        curr.next = head.next;
+         return head.next;
     }
 
 }
