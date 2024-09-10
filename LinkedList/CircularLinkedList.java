@@ -21,7 +21,12 @@ public class CircularLinkedList {
 
         // head = naiveInsertAtEnd(head, 101);
 
-        head = effecientltInsertAtEnt(head, 505);
+        // head = effecientltInsertAtEnt(head, 505);
+
+        // head = naiveDeleteHead(head);
+
+        head = effecientDeleteNode(head);
+
         traverseLinked(head);
     }
 
@@ -124,6 +129,19 @@ public class CircularLinkedList {
         }
         curr.next = head.next;
          return head.next;
+    }
+
+    //  Effecient Solution
+
+    public static Node effecientDeleteNode(Node head ){
+        if(head == null || head.next==head){
+            return null;
+        }
+
+        head.data= head.next.data;
+        head.next = head.next.next;
+
+        return head;
     }
 
 }
