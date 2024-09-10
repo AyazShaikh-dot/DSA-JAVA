@@ -11,10 +11,15 @@ public class CircularLinkedList {
         head.next.next = new Node(90);
         head.next.next.next = new Node(189);
         head.next.next.next.next=head;
-        
-        head = insertAtBeginnig(head, 900);
 
-        head =effecientInsertAtBeginning(head, 909);
+        // head.next=head;
+        // head=null;
+        
+        // head = insertAtBeginnig(head, 900);
+
+        // head =effecientInsertAtBeginning(head, 909);
+
+        head = naiveInsertAtEnd(head, 101);
         traverseLinked(head);
     }
 
@@ -65,5 +70,25 @@ public class CircularLinkedList {
         head.next = nodeToBeInserted;
 
         return head;
-}
+    }
+
+    // Naive Solution 
+    public static Node naiveInsertAtEnd(Node head, int x){
+        Node newNode = new Node(x);
+        if(head == null){
+            newNode.next = newNode;
+            return newNode;
+        }
+
+        Node curr = head;
+        while (curr.next != head) {
+            curr = curr.next;
+        }
+
+        curr.next = newNode;
+        newNode.next = head;
+
+        return head;
+    }
+
 }
