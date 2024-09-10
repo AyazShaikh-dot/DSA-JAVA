@@ -12,14 +12,16 @@ public class CircularLinkedList {
         head.next.next.next = new Node(189);
         head.next.next.next.next=head;
 
-        // head.next=head;
-        // head=null;
+        head.next=head;
+        head=null;
         
         // head = insertAtBeginnig(head, 900);
 
         // head =effecientInsertAtBeginning(head, 909);
 
-        head = naiveInsertAtEnd(head, 101);
+        // head = naiveInsertAtEnd(head, 101);
+
+        head = effecientltInsertAtEnt(head, 505);
         traverseLinked(head);
     }
 
@@ -89,6 +91,25 @@ public class CircularLinkedList {
         newNode.next = head;
 
         return head;
+    }
+
+    //  Efficient solution
+
+    public static Node effecientltInsertAtEnt (Node head , int x){
+        Node newNode = new Node(x);
+        if(head == null){
+            newNode.next = newNode;
+            return newNode;
+        }
+        
+        newNode.data= head.data;
+        head.data = x;
+
+        newNode.next = head.next;
+        head.next= newNode;
+
+        return newNode;
+        
     }
 
 }
