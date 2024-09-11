@@ -144,4 +144,24 @@ public class CircularLinkedList {
         return head;
     }
 
+    public static Node deleteKThNode(Node head , int pos){
+
+        if (head == null) return null;
+
+        if (pos ==1){
+            head =effecientDeleteNode(head);
+            return head;
+        }
+
+        int curPos=1;
+        Node curr = head;
+        while (curr.next != head && curPos<pos-1) {
+            curr=curr.next;
+        }
+
+        curr.next =curr.next.next;
+
+        return head;
+    }
+
 }
