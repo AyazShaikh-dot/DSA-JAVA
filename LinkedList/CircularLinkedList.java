@@ -25,7 +25,9 @@ public class CircularLinkedList {
 
         // head = naiveDeleteHead(head);
 
-        head = effecientDeleteNode(head);
+        // head = effecientDeleteNode(head);
+
+        head = deleteKThNode(head, 4);
 
         traverseLinked(head);
     }
@@ -148,15 +150,17 @@ public class CircularLinkedList {
 
         if (head == null) return null;
 
-        if (pos ==1){
+        if (pos == 1){
             head =effecientDeleteNode(head);
             return head;
         }
 
         int curPos=1;
         Node curr = head;
-        while (curr.next != head && curPos<pos-1) {
+        
+        while (curr.next != head && curPos < pos-1) {
             curr=curr.next;
+            curPos++;
         }
 
         curr.next =curr.next.next;
