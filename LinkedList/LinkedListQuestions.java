@@ -9,9 +9,17 @@ public class LinkedListQuestions {
         head.next = new Node(20);
         head.next.next = new Node(30);
         head.next.next.next = new Node(40);
+        head.next.next.next.next = new Node(50);
+        head.next.next.next.next.next = new Node(60);
 
-        head = insertInSortedLinkedList(head, 34);
-        traverseLinkedList(head);
+        // head = insertInSortedLinkedList(head, 34);
+
+
+        // System.out.println(middleOfLinkedList(head));
+
+        System.out.println(slowAndFastPointer(head));
+
+        // traverseLinkedList(head);
     }
 
     public static void traverseLinkedList(Node head){
@@ -40,5 +48,46 @@ public class LinkedListQuestions {
         curr.next = nodeTobeInserted;
 
         return head;
+    }
+
+
+    public static int middleOfLinkedList(Node head){
+        if(head == null)
+        return -1;
+
+        // if(head.next ==null) return head.data;  //This case is check already check in below code
+
+        int length = 0;
+        
+        Node curr = head;
+      
+        while (curr!=null) {
+            curr=curr.next;
+            length++;
+        }
+     
+            Node temp = head;
+            int i=1;
+            int pos= length/2;
+            while (i<=pos) {
+                temp=temp.next;
+                i++;
+            }
+            return temp.data;
+       
+    }
+
+    public static int slowAndFastPointer(Node head){
+
+        if(head == null)
+        return -1;
+
+        Node slow =head , fast =head;
+        while (fast !=null && fast.next!=null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow.data;
     }
 }
