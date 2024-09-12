@@ -17,7 +17,9 @@ public class LinkedListQuestions {
 
         // System.out.println(middleOfLinkedList(head));
 
-        System.out.println(slowAndFastPointer(head));
+        // System.out.println(slowAndFastPointer(head));
+
+        System.out.println(NthNodeFromLast(head, 6));
 
         // traverseLinkedList(head);
     }
@@ -89,5 +91,34 @@ public class LinkedListQuestions {
         }
 
         return slow.data;
+    }
+
+    // Print Nth Node from the last of the Linked List
+
+    public static int NthNodeFromLast(Node head , int n){
+        if(head == null){
+            return -1;
+        }
+
+        int length = 1;
+        Node curr = head;
+
+        while ( curr.next !=null) {
+            curr= curr.next;
+            length++;
+        }
+
+        if(length<n) return -1;
+
+       int nThNodeFromStarting = length - n + 1;
+    //    System.out.println(nThNodeFromStarting);
+       int i=1;
+       Node temp =head;
+       while (i<nThNodeFromStarting) {
+        temp=temp.next;
+        i++;
+       }
+
+       return temp.data;
     }
 }
