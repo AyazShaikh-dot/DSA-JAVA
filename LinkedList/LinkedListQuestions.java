@@ -165,4 +165,20 @@ public class LinkedListQuestions {
         }
 
     }
+
+    public static Node effecientlyReverseLinkedList(Node head){
+
+        Node curNode= head;
+        Node prevNode = null;
+        Node next= null;
+
+        while (curNode !=null) {
+            next = curNode.next;
+            curNode.next = prevNode;
+            prevNode = curNode;
+            curNode  = next;
+        }
+
+         return prevNode;
+    }
 }
