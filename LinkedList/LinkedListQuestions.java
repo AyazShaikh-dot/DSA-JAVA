@@ -20,6 +20,7 @@ public class LinkedListQuestions {
         // System.out.println(slowAndFastPointer(head));
 
         System.out.println(NthNodeFromLast(head, 6));
+        System.out.println(effecientSolutionOfNthNodeFromLast(head, 6));
 
         // traverseLinkedList(head);
     }
@@ -120,5 +121,24 @@ public class LinkedListQuestions {
        }
 
        return temp.data;
+    }
+
+    public static int effecientSolutionOfNthNodeFromLast( Node head, int pos){
+
+        if(head == null) return -1;
+
+        int i =1;
+        Node fast= head ,slow = head;
+        while ( i<=pos) {
+            fast = fast.next;
+            i++;
+        }
+
+        while (fast !=null) {
+            fast= fast.next;
+            slow = slow.next;
+        }
+
+        return slow.data;
     }
 }
