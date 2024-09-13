@@ -1,4 +1,5 @@
 package LinkedList;
+import java.util.*;
 
 public class LinkedListQuestions {
     
@@ -19,10 +20,12 @@ public class LinkedListQuestions {
 
         // System.out.println(slowAndFastPointer(head));
 
-        System.out.println(NthNodeFromLast(head, 6));
-        System.out.println(effecientSolutionOfNthNodeFromLast(head, 6));
+        // System.out.println(NthNodeFromLast(head, 6));
+        // System.out.println(effecientSolutionOfNthNodeFromLast(head, 6));
 
-        // traverseLinkedList(head);
+        naiveReverse(head);
+
+        traverseLinkedList(head);
     }
 
     public static void traverseLinkedList(Node head){
@@ -130,6 +133,7 @@ public class LinkedListQuestions {
         int i =1;
         Node fast= head ,slow = head;
         while ( i<=pos) {
+            if(fast==null) return -1;
             fast = fast.next;
             i++;
         }
@@ -140,5 +144,25 @@ public class LinkedListQuestions {
         }
 
         return slow.data;
+    }
+
+    // Reverse A Linked List
+
+    public static void naiveReverse(Node head){
+        ArrayList <Integer> cpy = new ArrayList<Integer>();
+        Node curr = head;
+        while (curr!=null) {
+            cpy.add(curr.data);
+            curr=curr.next;
+        }
+
+        // System.out.println(cpy.size());
+
+        Node temp = head;
+        while (temp!=null) {
+            temp.data= cpy.remove(cpy.size()-1);
+            temp=temp.next;
+        }
+
     }
 }
