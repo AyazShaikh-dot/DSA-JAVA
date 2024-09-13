@@ -186,13 +186,11 @@ public class LinkedListQuestions {
          return prevNode;
     }
 
-    // Recursive Reverse Linked List
+    // Recursive Reverse Linked List Method 1
 
     public static Node recursiveReverseMethod1(Node head){
       
-        if(head == null ) return null;
-
-        if(head.next ==null) return head;
+        if(head ==null || head.next == null) return head;
         Node restHead = recursiveReverseMethod1(head.next);
         
         Node restTail = head.next;
@@ -200,6 +198,16 @@ public class LinkedListQuestions {
         restTail.next = head;
 
         return restHead;
+    }
+
+    //  Recursive Solution Meyhod 2
+
+    public static Node recurSiveSolutionMethod2(Node curr , Node prev){
+        if(curr == null) return prev;
+
+      Node next =curr.next;
+      curr.next = prev;
+      return recurSiveSolutionMethod2(next, curr);
 
     }
 }
