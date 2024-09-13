@@ -23,7 +23,11 @@ public class LinkedListQuestions {
         // System.out.println(NthNodeFromLast(head, 6));
         // System.out.println(effecientSolutionOfNthNodeFromLast(head, 6));
 
-        naiveReverse(head);
+        // naiveReverse(head);
+
+        // head = effecientlyReverseLinkedList(head);
+
+        head = recursiveReverseMethod1(head);
 
         traverseLinkedList(head);
     }
@@ -180,5 +184,22 @@ public class LinkedListQuestions {
         }
 
          return prevNode;
+    }
+
+    // Recursive Reverse Linked List
+
+    public static Node recursiveReverseMethod1(Node head){
+      
+        if(head == null ) return null;
+
+        if(head.next ==null) return head;
+        Node restHead = recursiveReverseMethod1(head.next);
+        
+        Node restTail = head.next;
+        head.next = null;
+        restTail.next = head;
+
+        return restHead;
+
     }
 }
