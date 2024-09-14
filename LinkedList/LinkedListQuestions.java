@@ -5,13 +5,13 @@ public class LinkedListQuestions {
     
     public static void main(String[] args) {
               
-        Node head = new Node(10);
+        Node head = new Node(20);
 
         head.next = new Node(20);
-        head.next.next = new Node(30);
-        head.next.next.next = new Node(40);
-        head.next.next.next.next = new Node(50);
-        head.next.next.next.next.next = new Node(60);
+        head.next.next = new Node(20);
+        head.next.next.next = new Node(20);
+        head.next.next.next.next = new Node(20);
+        head.next.next.next.next.next = new Node(20);
 
         // head = insertInSortedLinkedList(head, 34);
 
@@ -27,7 +27,9 @@ public class LinkedListQuestions {
 
         // head = effecientlyReverseLinkedList(head);
 
-        head = recursiveReverseMethod1(head);
+        // head = recursiveReverseMethod1(head);
+
+        head = removeDup(head);
 
         traverseLinkedList(head);
     }
@@ -209,5 +211,24 @@ public class LinkedListQuestions {
       curr.next = prev;
       return recurSiveSolutionMethod2(next, curr);
 
+    }
+
+    //  Remove Duplicates from Sorted Linked List
+
+    public static Node removeDup(Node head){
+        if(head == null || head.next == null)
+        return head;
+
+        Node curr = head;
+        while (curr.next != null) {
+            if(curr.data == curr.next.data){
+                curr.next = curr.next.next;
+            }
+
+            else{
+                curr= curr.next;
+            }
+        }
+        return head;
     }
 }
