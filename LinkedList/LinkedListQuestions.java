@@ -5,13 +5,15 @@ public class LinkedListQuestions {
     
     public static void main(String[] args) {
               
-        Node head = new Node(20);
+        Node head = new Node(10);
 
         head.next = new Node(20);
-        head.next.next = new Node(20);
-        head.next.next.next = new Node(20);
-        head.next.next.next.next = new Node(20);
-        head.next.next.next.next.next = new Node(20);
+        head.next.next = new Node(30);
+        head.next.next.next = new Node(40);
+        head.next.next.next.next = new Node(50);
+        head.next.next.next.next.next = new Node(60);
+        head.next.next.next.next.next.next = new Node(70);
+
 
         // head = insertInSortedLinkedList(head, 34);
 
@@ -29,7 +31,9 @@ public class LinkedListQuestions {
 
         // head = recursiveReverseMethod1(head);
 
-        head = removeDup(head);
+        // head = removeDup(head);
+
+        head = reverseInGroup(head, 3);
 
         traverseLinkedList(head);
     }
@@ -230,5 +234,33 @@ public class LinkedListQuestions {
             }
         }
         return head;
+    }
+
+    // Revserse A Linked List in Groups
+
+    public static Node reverseInGroup(Node head ,int k){
+
+        // if(head == null || head.next == null ) return head;
+
+        Node prevNode = null;
+        Node next = null;
+        Node curr = head;
+
+        int count = 1;
+
+        while (curr !=null && count <= k) {
+            next = curr.next;
+            curr.next = prevNode;
+            prevNode = curr;
+            curr = next;
+
+            count++;
+        }
+        if(next!=null){
+        Node restHead = reverseInGroup(next, k);
+        head.next = restHead;
+        }
+        return prevNode;
+        
     }
 }
