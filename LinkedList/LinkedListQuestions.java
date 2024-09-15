@@ -33,7 +33,9 @@ public class LinkedListQuestions {
 
         // head = removeDup(head);
 
-        head = reverseInGroup(head, 3);
+        // head = reverseInGroup(head, 3);
+
+        head = reverseInGroupIteratively(head, 4);
 
         traverseLinkedList(head);
     }
@@ -262,5 +264,41 @@ public class LinkedListQuestions {
         }
         return prevNode;
         
+    }
+
+    public static Node reverseInGroupIteratively(Node head ,int k){
+
+        // if(head == null || head.next == null ) return head;
+        Node curr = head;
+        Node prevFirst =null;
+        boolean isFirstPass =true;
+        while (curr != null) {
+            Node prevNode = null;
+            Node next = null;
+    
+            int count = 1;
+            Node first = curr;
+            
+            while (curr !=null && count <= k) {
+                next = curr.next;
+                curr.next = prevNode;
+                prevNode = curr;
+                curr = next;
+    
+                count++;
+            }
+
+            if(isFirstPass){
+                head = prevNode;
+                isFirstPass= false;
+            }
+            else{
+                prevFirst.next = prevNode;
+            }
+            prevFirst = first;
+        }
+
+        return head;
+      
     }
 }
