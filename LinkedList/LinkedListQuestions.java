@@ -14,6 +14,11 @@ public class LinkedListQuestions {
         head.next.next.next.next.next = new Node(60);
         head.next.next.next.next.next.next = new Node(70);
 
+        head.next.next.next.next.next.next.next = head;
+
+
+
+
 
         // head = insertInSortedLinkedList(head, 34);
 
@@ -35,9 +40,11 @@ public class LinkedListQuestions {
 
         // head = reverseInGroup(head, 3);
 
-        head = reverseInGroupIteratively(head, 4);
+        // head = reverseInGroupIteratively(head, 4);
+        
+        System.out.println(detectLoop(head));
 
-        traverseLinkedList(head);
+        // traverseLinkedList(head);
     }
 
     public static void traverseLinkedList(Node head){
@@ -300,5 +307,23 @@ public class LinkedListQuestions {
 
         return head;
       
+    }
+
+    // Detect Loop in linked List
+
+    public static boolean detectLoop(Node head){
+        Node slow = head;
+        Node fast = head;
+
+        while (fast!=null && fast.next!=null) {
+            
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if(slow == fast)
+            return true;
+        }
+
+        return false;
     }
 }
