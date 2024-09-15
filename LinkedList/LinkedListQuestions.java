@@ -14,7 +14,7 @@ public class LinkedListQuestions {
         head.next.next.next.next.next = new Node(60);
         head.next.next.next.next.next.next = new Node(70);
 
-        // head.next.next.next.next.next.next.next = head;
+        head.next.next.next.next.next.next.next = head;
 
 
 
@@ -42,10 +42,12 @@ public class LinkedListQuestions {
 
         // head = reverseInGroupIteratively(head, 4);
         
-        System.out.println(floydCycleDetection(head));
-        System.out.println(usingHashingCycleDetection(head));
+        // System.out.println(floydCycleDetection(head));
+        // System.out.println(usingHashingCycleDetection(head));
 
-        // traverseLinkedList(head);
+        detectAndRemoveUsingHashing(head);
+
+        traverseLinkedList(head);
     }
 
     public static void traverseLinkedList(Node head){
@@ -340,5 +342,24 @@ public class LinkedListQuestions {
         }
 
         return false;
+    }
+
+    //  Detect and Remove Cycle from Linked List
+
+    // First using hashing 
+    public static Node detectAndRemoveUsingHashing( Node head){
+        HashSet <Node> hs = new HashSet<>();
+
+        Node curr = head;
+        while (curr != null) {
+            if(hs.contains(curr.next)){
+                curr.next=null;
+                return head;
+            }
+            hs.add(curr);
+            curr =curr.next;
+        }
+
+        return head;
     }
 }
