@@ -7,6 +7,7 @@ public class LinkedListQuestions {
               
         Node head = new Node(10);
 
+        // head.next=head;
         head.next = new Node(20);
         head.next.next = new Node(30);
         head.next.next.next = new Node(40);
@@ -45,7 +46,9 @@ public class LinkedListQuestions {
         // System.out.println(floydCycleDetection(head));
         // System.out.println(usingHashingCycleDetection(head));
 
-        detectAndRemoveUsingHashing(head);
+        // detectAndRemoveUsingHashing(head);
+
+        detectAndRemoveCycleUsingFloydAlgo(head);
 
         traverseLinkedList(head);
     }
@@ -362,4 +365,37 @@ public class LinkedListQuestions {
 
         return head;
     }
+
+    public static void detectAndRemoveCycleUsingFloydAlgo(Node head){
+
+        if(head == null || head.next == null) return ;
+
+        Node slow = head;
+        Node fast = head;
+        while (fast != null && fast.next!=null) {
+            slow =slow.next;
+            fast=fast.next.next;
+
+            if(slow == fast){
+                break;
+            }
+        }
+
+        if(slow != fast){
+            return ;
+        }
+
+        slow = head;
+        while (slow !=fast) {
+            slow=slow.next;
+            fast=fast.next;
+        }
+
+        while (fast.next != slow) {
+            fast =fast.next;
+        }
+
+        fast.next = null;
+    }
+
 }
