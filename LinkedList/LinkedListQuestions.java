@@ -14,7 +14,7 @@ public class LinkedListQuestions {
         head.next.next.next.next.next = new Node(60);
         head.next.next.next.next.next.next = new Node(70);
 
-        head.next.next.next.next.next.next.next = head;
+        // head.next.next.next.next.next.next.next = head;
 
 
 
@@ -42,7 +42,8 @@ public class LinkedListQuestions {
 
         // head = reverseInGroupIteratively(head, 4);
         
-        System.out.println(detectLoop(head));
+        System.out.println(floydCycleDetection(head));
+        System.out.println(usingHashingCycleDetection(head));
 
         // traverseLinkedList(head);
     }
@@ -311,7 +312,21 @@ public class LinkedListQuestions {
 
     // Detect Loop in linked List
 
-    public static boolean detectLoop(Node head){
+    public static boolean usingHashingCycleDetection(Node head){
+
+        HashSet<Node> hs = new HashSet<>();
+      
+        Node curr = head;
+        while (curr!=null) {
+            if(hs.contains(curr)) return true;
+
+            hs.add(curr);
+            curr=curr.next;
+        }
+        return false;
+    }
+    
+    public static boolean floydCycleDetection(Node head){
         Node slow = head;
         Node fast = head;
 
