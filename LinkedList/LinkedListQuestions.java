@@ -386,16 +386,17 @@ public class LinkedListQuestions {
         }
 
         slow = head;
-        while (slow !=fast) {
+        while (slow.next !=fast.next) {
             slow=slow.next;
             fast=fast.next;
         }
-
-        while (fast.next != slow) {
-            fast =fast.next;
-        }
-
         fast.next = null;
     }
 
+    // Delete Note with only Pointer Given to it
+
+    public static void  deleteNodeWithGivenPointer(Node nodeToBeDeleted){
+        nodeToBeDeleted.data = nodeToBeDeleted.next.data;
+        nodeToBeDeleted.next = nodeToBeDeleted.next.next;
+    }
 }
