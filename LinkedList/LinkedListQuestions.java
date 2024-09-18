@@ -15,13 +15,13 @@ public class LinkedListQuestions {
         head.next.next.next.next.next = new Node(8);
         head.next.next.next.next.next.next = new Node(9);
 
-        Node head2 = new Node(1010);
-        head2.next = new Node( 909);
-        head2.next.next=head.next.next.next;
+   
 
         // head.next.next.next.next.next.next.next = head;
 
-
+        // Node head2 = new Node(1010);
+        // head2.next = new Node( 909);
+        // head2.next.next=head.next.next.next;
 
 
 
@@ -58,9 +58,13 @@ public class LinkedListQuestions {
 
         // head = effecientSegregateOddEven(head);
 
-        System.out.println(naiveIntersectionPoint(head, head2));
+        // System.out.println(naiveIntersectionPoint(head, head2));
 
-        // traverseLinkedList(head);
+        // System.out.println(effecientIntersectionPoint(head, head2));
+
+        myPairWiseSwap(head);
+
+        traverseLinkedList(head);
     }
 
     public static void traverseLinkedList(Node head){
@@ -511,7 +515,7 @@ public class LinkedListQuestions {
         return evenStart;
     }
 
-    //  Intersection Point 
+    //  Intersection Point Naive Solution Space Complexity O(N||M) Time Complexity O(N + M)
 
     public static int naiveIntersectionPoint(Node head1, Node head2){
 
@@ -533,5 +537,79 @@ public class LinkedListQuestions {
             curr2=curr2.next;
         }
         return -1;
+    }
+
+    // Effecient Solution 
+    public static int effecientIntersectionPoint(Node head1 , Node head2){
+        int c1=0;
+        int c2=0;
+
+        for(Node curr= head1; curr!=null; curr=curr.next){
+            c1++;
+        }
+        for(Node curr= head2; curr!=null; curr=curr.next){
+            c2++;
+        }
+
+        // System.out.println(c1 +" " + c2);
+
+        int absoluteValue = Math.abs(c1-c2);
+
+        if(c1>=c2){
+            Node curr1 = head1;
+            while (absoluteValue>0) {
+                curr1= curr1.next;
+                absoluteValue--;
+            }
+            System.out.println(curr1.data);
+           
+            Node curr2 = head2;
+
+            while (curr1!=null && curr2!=null) {
+                if(curr1==curr2)
+                return curr1.data;
+
+                curr1= curr1.next;
+                curr2= curr2.next;
+            }
+        }
+        else{
+            Node curr2 = head2;
+            while (absoluteValue>0) {
+                curr2= curr2.next;
+                absoluteValue--;
+            }
+            Node curr1 = head1;
+
+            while (curr2!=null && curr1!=null) {
+                if(curr1==curr2)
+                return curr1.data;
+
+                curr1= curr1.next;
+                curr2= curr2.next;
+            }
+        }
+
+        return -1;
+    }
+
+    //  Swap Pairwise My Approach 
+
+    public static void myPairWiseSwap(Node head){
+        if(head == null || head.next == null){
+            return;
+        }
+
+        Node firstNode = head;
+        Node secondNode = head.next;
+
+        while (secondNode!=null) {
+            int temp = firstNode.data;
+            firstNode.data = secondNode.data;
+            secondNode.data =temp;
+
+            firstNode.next= secondNode.next;
+            secondNode.next = firstNode.next;
+        }
     }
 }
