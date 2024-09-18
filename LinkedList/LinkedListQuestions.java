@@ -608,8 +608,11 @@ public class LinkedListQuestions {
             firstNode.data = secondNode.data;
             secondNode.data =temp;
 
-            firstNode.next= secondNode.next;
-            secondNode.next = firstNode.next;
+            firstNode= secondNode.next;
+            if(firstNode==null){
+                return;
+            }
+            secondNode= firstNode.next;
         }
     }
 }
