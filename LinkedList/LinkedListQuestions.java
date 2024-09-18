@@ -15,6 +15,10 @@ public class LinkedListQuestions {
         head.next.next.next.next.next = new Node(8);
         head.next.next.next.next.next.next = new Node(9);
 
+        Node head2 = new Node(1010);
+        head2.next = new Node( 909);
+        head2.next.next=head.next.next.next;
+
         // head.next.next.next.next.next.next.next = head;
 
 
@@ -52,9 +56,11 @@ public class LinkedListQuestions {
 
         // head = segregateOddEven(head);
 
-       head = effecientSegregateOddEven(head);
+        // head = effecientSegregateOddEven(head);
 
-        traverseLinkedList(head);
+        System.out.println(naiveIntersectionPoint(head, head2));
+
+        // traverseLinkedList(head);
     }
 
     public static void traverseLinkedList(Node head){
@@ -495,8 +501,37 @@ public class LinkedListQuestions {
             curr= curr.next;
         }
 
+        if(evenStart == null || oddStart == null){
+            return head;
+        }
+
         evenEnd.next = oddStart;
+        oddEnd.next = null;
 
         return evenStart;
+    }
+
+    //  Intersection Point 
+
+    public static int naiveIntersectionPoint(Node head1, Node head2){
+
+    
+        Node curr1 = head1;
+        Node curr2 = head2;
+
+        HashSet <Node> hs = new HashSet<>();
+
+        while (curr1!=null) {
+            hs.add(curr1);
+            curr1=curr1.next;
+        }
+
+        while (curr2!=null) {
+            if(hs.contains(curr2)){
+                return curr2.data;
+            }
+            curr2=curr2.next;
+        }
+        return -1;
     }
 }
