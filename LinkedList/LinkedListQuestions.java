@@ -50,7 +50,9 @@ public class LinkedListQuestions {
 
         // detectAndRemoveCycleUsingFloydAlgo(head);
 
-        head = segregateOddEven(head);
+        // head = segregateOddEven(head);
+
+       head = effecientSegregateOddEven(head);
 
         traverseLinkedList(head);
     }
@@ -403,7 +405,7 @@ public class LinkedListQuestions {
     }
 
     //  Segregate Even odd Linked list
-
+    // My Solution but does not maintainn the order of linkedlist
     public static Node segregateOddEven(Node head){
         if(head ==null || head.next == null)
         return head;
@@ -424,5 +426,77 @@ public class LinkedListQuestions {
         }
 
         return head;
+    }
+
+    // Anothe naive approach 
+    // public static Node segregateEvenOddTwo(Node head){
+
+    //     Node lastNode =head;
+      
+
+    //     while (lastNode.next !=null) {
+    //         lastNode= lastNode.next;
+    //     }
+    //     Node firstLastNode =lastNode;
+    //     Node startingNode = head;
+    //     boolean firstOddNode = true;
+
+    //     while (startingNode != firstLastNode) {
+    //         if(startingNode.data%2!=0){
+    //             lastNode.next = startingNode;
+    //             lastNode = lastNode.next;
+    //         }
+    //         if(startingNode.data%2==0 && firstOddNode){
+    //             head = startingNode;
+    //             firstOddNode = false;
+    //         }
+
+    //         startingNode = startingNode.next;
+    //     }
+
+    //     return head;
+
+    // }
+
+    //Effecient Solution
+    
+    public static Node effecientSegregateOddEven( Node head){
+
+        Node evenStart = null;
+        Node evenEnd = null;
+
+        Node oddStart = null;
+        Node oddEnd = null;
+
+        Node curr = head;
+        
+        while (curr != null) {
+            
+            if(curr.data%2 == 0){
+                if(evenStart==null){
+                    evenStart=evenEnd=curr;
+                }
+                else{
+                    evenEnd.next= curr;
+                    evenEnd=evenEnd.next;
+                }
+            }
+            else{
+                if(oddEnd==null){
+                    oddStart = curr;
+                    oddEnd = curr;
+                }
+                else{
+                    oddEnd.next= curr;
+                    oddEnd=oddEnd.next;
+                }
+            }
+
+            curr= curr.next;
+        }
+
+        evenEnd.next = oddStart;
+
+        return evenStart;
     }
 }
