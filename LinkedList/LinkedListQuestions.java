@@ -8,14 +8,14 @@ public class LinkedListQuestions {
         Node head = new Node(10);
 
         // head.next=head;
-        head.next = new Node(20);
-        head.next.next = new Node(30);
-        head.next.next.next = new Node(40);
-        head.next.next.next.next = new Node(50);
-        head.next.next.next.next.next = new Node(60);
-        head.next.next.next.next.next.next = new Node(70);
+        head.next = new Node(90);
+        head.next.next = new Node(1);
+        head.next.next.next = new Node(3);
+        head.next.next.next.next = new Node(5);
+        head.next.next.next.next.next = new Node(8);
+        head.next.next.next.next.next.next = new Node(9);
 
-        head.next.next.next.next.next.next.next = head;
+        // head.next.next.next.next.next.next.next = head;
 
 
 
@@ -48,7 +48,9 @@ public class LinkedListQuestions {
 
         // detectAndRemoveUsingHashing(head);
 
-        detectAndRemoveCycleUsingFloydAlgo(head);
+        // detectAndRemoveCycleUsingFloydAlgo(head);
+
+        head = segregateOddEven(head);
 
         traverseLinkedList(head);
     }
@@ -398,5 +400,29 @@ public class LinkedListQuestions {
     public static void  deleteNodeWithGivenPointer(Node nodeToBeDeleted){
         nodeToBeDeleted.data = nodeToBeDeleted.next.data;
         nodeToBeDeleted.next = nodeToBeDeleted.next.next;
+    }
+
+    //  Segregate Even odd Linked list
+
+    public static Node segregateOddEven(Node head){
+        if(head ==null || head.next == null)
+        return head;
+
+        Node currNode = head;
+        Node nextOddNode = head;
+
+        while (nextOddNode != null) {
+            if(nextOddNode.data %2 ==0){
+                int temp =nextOddNode.data;
+                nextOddNode.data = currNode.data;
+                currNode.data = temp;
+                
+                currNode = currNode.next;
+            }
+
+            nextOddNode= nextOddNode.next;
+        }
+
+        return head;
     }
 }
