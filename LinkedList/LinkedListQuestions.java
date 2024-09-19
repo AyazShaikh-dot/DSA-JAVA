@@ -77,24 +77,23 @@ public class LinkedListQuestions {
 
         // traverseLinkedList(head);
 
-        NodeWithRandom headWithRandom = new NodeWithRandom(900);
-        headWithRandom.next = new NodeWithRandom(901);
-        headWithRandom.next.next = new NodeWithRandom(902);
-        headWithRandom.next.next.next = new NodeWithRandom(903);
-        headWithRandom.next.next.next.next = new NodeWithRandom(905);
+        NodeWithRandom headWithRandom = new NodeWithRandom(10);
+        headWithRandom.next = new NodeWithRandom(5);
+        headWithRandom.next.next = new NodeWithRandom(20);
+        headWithRandom.next.next.next = new NodeWithRandom(15);
+
 
         headWithRandom.random = headWithRandom.next.next;
         headWithRandom.next.random = headWithRandom;
         headWithRandom.next.next.random = headWithRandom;
-        headWithRandom.next.next.next.random = headWithRandom.next.next.next.next;
-        headWithRandom.next.next.next.next.random=headWithRandom.next;
+        headWithRandom.next.next.next.random = headWithRandom.next.next;
+     
 
         NodeWithRandom copyHead = naiveClone(headWithRandom);
 
-        copyHead.next.data =700;
-
-        System.out.println(headWithRandom.next.next.next.random.data);
-        traverseRandom(headWithRandom);
+        
+        // traverseRandom(headWithRandom);
+        System.out.println(copyHead.next.random.data);
         traverseRandom(copyHead);
 
       
@@ -687,6 +686,8 @@ public class LinkedListQuestions {
         }
     }
     public static NodeWithRandom naiveClone(NodeWithRandom head){
+
+        ArrayList<Integer> randomPointerLocation = new ArrayList<>();
         NodeWithRandom head2 =new NodeWithRandom(head.data);
 
         NodeWithRandom currHead2= head2;
@@ -699,6 +700,32 @@ public class LinkedListQuestions {
             currHead2= currHead2.next;
         }
 
+        NodeWithRandom forLocation = head;
+
+
+        while (forLocation!=null) {
+            NodeWithRandom currForLocation =head;
+            int locationIndex=1;
+            while (currForLocation!=null && forLocation.random != currForLocation) {
+                locationIndex++;
+                currForLocation=currForLocation.next;
+            }
+            randomPointerLocation.add(locationIndex);
+
+            forLocation=forLocation.next;
+        }
+      
+        NodeWithRandom head2Curr = head2;
+        for(int i=0;i<randomPointerLocation.size();i++){
+            NodeWithRandom findRandomReferrence = head2;
+            int index =1;
+            while (randomPointerLocation.get(i)>index) {
+                findRandomReferrence=findRandomReferrence.next;
+                index++;
+            }
+            head2Curr.random = findRandomReferrence;
+            head2Curr=head2Curr.next;
+        }
         return head2;
     }
 }
