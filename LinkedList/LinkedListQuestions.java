@@ -13,7 +13,7 @@ public class LinkedListQuestions {
         head.next.next.next = new Node(3);
         head.next.next.next.next = new Node(5);
         head.next.next.next.next.next = new Node(8);
-        head.next.next.next.next.next.next = new Node(9);
+        // head.next.next.next.next.next.next = new Node(9);
 
    
 
@@ -56,13 +56,15 @@ public class LinkedListQuestions {
 
         // head = segregateOddEven(head);
 
-        // head = effecientSegregateOddEven(head);
+        // head = effecientSegregateOddEven(head);p
 
         // System.out.println(naiveIntersectionPoint(head, head2));
 
         // System.out.println(effecientIntersectionPoint(head, head2));
 
-        myPairWiseSwap(head);
+        // myPairWiseSwap(head);
+
+       head= effecientPairWiseSwap(head);
 
         traverseLinkedList(head);
     }
@@ -600,19 +602,42 @@ public class LinkedListQuestions {
             return;
         }
 
-        Node firstNode = head;
-        Node secondNode = head.next;
+      Node curr =head;
 
-        while (secondNode!=null) {
-            int temp = firstNode.data;
-            firstNode.data = secondNode.data;
-            secondNode.data =temp;
+        while (curr!=null && curr.next!=null) {
+            int temp = curr.data;
+            curr.data = curr.next.data;
+            curr.next.data =temp;
 
-            firstNode= secondNode.next;
-            if(firstNode==null){
-                return;
-            }
-            secondNode= firstNode.next;
+            curr= curr.next.next;
         }
+    }
+
+    // Above Solution is not Good as because in real world we have objects stores in linked list and swapping is not a good idea;
+
+    public static Node effecientPairWiseSwap(Node head){
+
+        if(head == null || head.next == null){
+            return head;
+        }
+
+       Node curr = head.next.next;
+       Node prev = head;
+       head= head.next;
+       head.next = prev;
+
+        
+        while (curr!=null && curr.next!=null) {
+            // swap logic
+            prev.next = curr.next;
+            prev = curr;
+            Node next = curr.next.next;
+            curr.next.next = curr;
+            curr= next;
+        }
+
+        prev.next = curr;
+
+        return head;
     }
 }
