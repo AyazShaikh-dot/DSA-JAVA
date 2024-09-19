@@ -1,6 +1,15 @@
 package LinkedList;
 import java.util.*;
 
+ class NodeWithRandom{
+    int data;
+    NodeWithRandom next;
+    NodeWithRandom random;
+
+    NodeWithRandom(int x){
+        data =x;
+    }
+}
 public class LinkedListQuestions {
     
     public static void main(String[] args) {
@@ -64,9 +73,33 @@ public class LinkedListQuestions {
 
         // myPairWiseSwap(head);
 
-       head= effecientPairWiseSwap(head);
+        //  head= effecientPairWiseSwap(head);
 
-        traverseLinkedList(head);
+        // traverseLinkedList(head);
+
+        NodeWithRandom headWithRandom = new NodeWithRandom(900);
+        headWithRandom.next = new NodeWithRandom(901);
+        headWithRandom.next.next = new NodeWithRandom(902);
+        headWithRandom.next.next.next = new NodeWithRandom(903);
+        headWithRandom.next.next.next.next = new NodeWithRandom(905);
+
+        headWithRandom.random = headWithRandom.next.next;
+        headWithRandom.next.random = headWithRandom;
+        headWithRandom.next.next.random = headWithRandom;
+        headWithRandom.next.next.next.random = headWithRandom.next.next.next.next;
+        headWithRandom.next.next.next.next.random=headWithRandom.next;
+
+        NodeWithRandom copyHead = naiveClone(headWithRandom);
+
+        copyHead.next.data =700;
+
+        System.out.println(headWithRandom.next.next.next.random.data);
+        traverseRandom(headWithRandom);
+        traverseRandom(copyHead);
+
+      
+
+      
     }
 
     public static void traverseLinkedList(Node head){
@@ -639,5 +672,33 @@ public class LinkedListQuestions {
         prev.next = curr;
 
         return head;
+    }
+
+    // Clone a Linked list With Random Pointer
+
+    // traversal 
+
+    public static void traverseRandom(NodeWithRandom head){
+        NodeWithRandom curr = head;
+        while (curr!=null) {
+            System.out.println(curr.data);
+
+            curr = curr.next;
+        }
+    }
+    public static NodeWithRandom naiveClone(NodeWithRandom head){
+        NodeWithRandom head2 =new NodeWithRandom(head.data);
+
+        NodeWithRandom currHead2= head2;
+
+        NodeWithRandom currHead = head.next;
+        while (currHead!=null) {
+            currHead2.next = new NodeWithRandom(currHead.data);
+
+            currHead= currHead.next;
+            currHead2= currHead2.next;
+        }
+
+        return head2;
     }
 }
