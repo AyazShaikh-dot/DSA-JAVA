@@ -89,10 +89,11 @@ public class LinkedListQuestions {
         headWithRandom.next.next.next.random = headWithRandom.next.next;
      
 
-        NodeWithRandom copyHead = naiveClone(headWithRandom);
+        // NodeWithRandom copyHead = naiveClone(headWithRandom);
+        NodeWithRandom copyHead =cloneUsingHashing(headWithRandom);
 
         
-        // traverseRandom(headWithRandom);
+        
         System.out.println(copyHead.next.random.data);
         traverseRandom(copyHead);
 
@@ -727,5 +728,31 @@ public class LinkedListQuestions {
             head2Curr=head2Curr.next;
         }
         return head2;
+    }
+
+    // Using Hashing
+
+    public static NodeWithRandom cloneUsingHashing(NodeWithRandom head){
+        HashMap<NodeWithRandom,NodeWithRandom> m = new HashMap<>();
+
+        NodeWithRandom curr = head;
+        while (curr != null) {
+            m.put(curr,new NodeWithRandom(curr.data));
+            curr= curr.next;
+        }
+
+        NodeWithRandom curr2 = head;
+
+        while (curr2!=null) {
+            NodeWithRandom clone = m.get(curr2);
+            clone.next =m.get(curr2.next);
+            clone.random = m.get(curr2.random);
+
+            curr2=curr2.next;
+        }
+
+        return m.get(head);
+
+
     }
 }
