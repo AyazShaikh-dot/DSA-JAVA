@@ -92,16 +92,21 @@ public class LinkedListQuestions {
         // NodeWithRandom copyHead = naiveClone(headWithRandom);
         // NodeWithRandom copyHead =cloneUsingHashing(headWithRandom);
 
-        traverseRandom(headWithRandom);
-        
-        NodeWithRandom newHead = effecientCopyLinkedList(headWithRandom);
+        // traverseRandom(headWithRandom);
+
+        // NodeWithRandom newHead = effecientCopyLinkedList(headWithRandom);
        
-        System.out.println("New Linked List");
-        System.out.println(newHead.random.data);
-        traverseRandom(newHead);
+        // System.out.println("New Linked List");
+        // System.out.println(newHead.random.data);
+        // traverseRandom(newHead);
 
       
+        int references[] = {1, 1, 1, 1};
 
+        DoublyNode doubleHead = LRUCacheDesign(references, 2);
+
+        traverseDoubly(doubleHead);
+        
       
     }
 
@@ -795,5 +800,79 @@ public class LinkedListQuestions {
 
 
         return newHead;
+    }
+
+    // LRU CACHE DESIGN
+
+    public static DoublyNode LRUCacheDesign(int[] references, int size){
+
+        HashMap<Integer,DoublyNode> hm = new HashMap<>();
+        DoublyNode head=null;
+        DoublyNode tail=null;
+        
+        for(int i=0;i<references.length;i++){
+            
+            if(!hm.containsKey(references[i]) && size>0){
+                DoublyNode addNode = new DoublyNode(references[i]);
+                if(hm.isEmpty()){
+                    head =addNode;
+                    tail = addNode;
+                }
+                else{
+                    addNode.next=head;
+                    head.prev =addNode;
+                    head=addNode;
+                }
+                hm.put(references[i], addNode);
+                size--;
+            }
+            else if(!hm.containsKey(references[i]) && size==0){
+                DoublyNode addNode = new DoublyNode(references[i]);
+                hm.remove(tail.data);
+                hm.put(references[i], addNode);
+                tail.prev.next =null;
+                tail= tail.prev;
+
+                addNode.next =head;
+                head.prev =addNode;
+                head =addNode;
+                
+            }
+
+            else{
+                DoublyNode curr =hm.get(references[i]);
+
+                if(curr != tail){
+                    curr.prev.next = curr.next;
+                    curr.next.prev = curr.prev;
+
+                    
+                }
+
+                else{
+                    curr.prev.next =null;
+                    tail = curr.prev;
+                    // if(tail.prev==null){
+                    //     tail.prev =curr;
+                    // }
+                }
+
+                    curr.next = head;
+                    head.prev = curr;
+                    head =curr;
+
+            }
+        }
+
+        return head;
+    }
+
+    public static void traverseDoubly(DoublyNode head){
+        DoublyNode curr = head;
+
+        while ( curr !=null) {
+            System.out.println(curr.data);
+            curr=curr.next;
+        }
     }
 }
