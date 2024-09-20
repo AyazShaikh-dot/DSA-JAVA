@@ -90,12 +90,15 @@ public class LinkedListQuestions {
      
 
         // NodeWithRandom copyHead = naiveClone(headWithRandom);
-        NodeWithRandom copyHead =cloneUsingHashing(headWithRandom);
+        // NodeWithRandom copyHead =cloneUsingHashing(headWithRandom);
 
+        traverseRandom(headWithRandom);
         
-        
-        System.out.println(copyHead.next.random.data);
-        traverseRandom(copyHead);
+        NodeWithRandom newHead = effecientCopyLinkedList(headWithRandom);
+       
+        System.out.println("New Linked List");
+        System.out.println(newHead.random.data);
+        traverseRandom(newHead);
 
       
 
@@ -754,5 +757,43 @@ public class LinkedListQuestions {
         return m.get(head);
 
 
+    }
+
+    public static NodeWithRandom effecientCopyLinkedList(NodeWithRandom head){
+
+        NodeWithRandom curr = head;
+        while (curr != null) {
+            NodeWithRandom copy = new NodeWithRandom(curr.data);
+            copy.next=curr.next;
+            curr.next = copy;
+            curr=curr.next.next;
+        }
+
+        NodeWithRandom curr3 = head;
+        NodeWithRandom newHead = curr3.next;
+        NodeWithRandom newHeadCurr = newHead;
+
+        while (curr3!=null) {
+            newHeadCurr.random=curr3.random.next;
+
+            newHeadCurr=newHead.next.next;
+            curr3=curr3.next.next;
+        }
+
+        NodeWithRandom curr2 = head;
+        NodeWithRandom newHeadCurr2 = newHead;
+        while (curr2!=null && curr2.next!=null) {
+           curr2.next = curr2.next.next;
+           if(curr2.next!=null)
+           {
+           newHeadCurr2.next = curr2.next.next;
+    
+        }
+           curr2 =curr2.next;
+           newHeadCurr2=newHeadCurr2.next;
+        }
+
+
+        return newHead;
     }
 }
