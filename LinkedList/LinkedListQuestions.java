@@ -14,14 +14,14 @@ public class LinkedListQuestions {
     
     public static void main(String[] args) {
               
-        Node head = new Node(10);
+        // Node head = new Node(10);
 
         // head.next=head;
-        head.next = new Node(90);
-        head.next.next = new Node(1);
-        head.next.next.next = new Node(3);
-        head.next.next.next.next = new Node(5);
-        head.next.next.next.next.next = new Node(8);
+        // head.next = new Node(90);
+        // head.next.next = new Node(1);
+        // head.next.next.next = new Node(3);
+        // head.next.next.next.next = new Node(5);
+        // head.next.next.next.next.next = new Node(8);
         // head.next.next.next.next.next.next = new Node(9);
 
    
@@ -77,16 +77,17 @@ public class LinkedListQuestions {
 
         // traverseLinkedList(head);
 
-        NodeWithRandom headWithRandom = new NodeWithRandom(10);
-        headWithRandom.next = new NodeWithRandom(5);
-        headWithRandom.next.next = new NodeWithRandom(20);
-        headWithRandom.next.next.next = new NodeWithRandom(15);
+        // Copy Linked list with random pointer
+        // NodeWithRandom headWithRandom = new NodeWithRandom(10);
+        // headWithRandom.next = new NodeWithRandom(5);
+        // headWithRandom.next.next = new NodeWithRandom(20);
+        // headWithRandom.next.next.next = new NodeWithRandom(15);
 
 
-        headWithRandom.random = headWithRandom.next.next;
-        headWithRandom.next.random = headWithRandom;
-        headWithRandom.next.next.random = headWithRandom;
-        headWithRandom.next.next.next.random = headWithRandom.next.next;
+        // headWithRandom.random = headWithRandom.next.next;
+        // headWithRandom.next.random = headWithRandom;
+        // headWithRandom.next.next.random = headWithRandom;
+        // headWithRandom.next.next.next.random = headWithRandom.next.next;
      
 
         // NodeWithRandom copyHead = naiveClone(headWithRandom);
@@ -100,12 +101,28 @@ public class LinkedListQuestions {
         // System.out.println(newHead.random.data);
         // traverseRandom(newHead);
 
-      
-        int references[] = {1, 1, 1, 1};
 
-        DoublyNode doubleHead = LRUCacheDesign(references, 2);
+        //  LRU CACHE DESIGN
+        // int references[] = {1, 2, 1, 2, 3, 3, 2, 1};
 
-        traverseDoubly(doubleHead);
+        // DoublyNode doubleHead = LRUCacheDesign(references, 1);
+
+        // traverseDoubly(doubleHead);
+
+        Node head1= new Node(10);
+        head1.next =new Node(20);
+        head1.next.next = new Node(30);
+        head1.next.next.next = new Node(40);
+
+        Node head2= new Node(5);
+        head2.next =new Node(15);
+        head2.next.next = new Node(17);
+        head2.next.next.next = new Node(18);
+        head2.next.next.next.next = new Node(35);
+        
+        Node newHead = mergeTwoSortedLinkedList(head1,head2);
+
+        traverseLinkedList(newHead);
         
       
     }
@@ -828,20 +845,32 @@ public class LinkedListQuestions {
             }
             else if(!hm.containsKey(references[i]) && size==0){
                 DoublyNode addNode = new DoublyNode(references[i]);
+              
                 hm.remove(tail.data);
-                hm.put(references[i], addNode);
+                
+                // CASE : If head and tail refference to same node
+                if(tail.prev==null){
+                    head=addNode;
+                    tail=addNode;
+                }
+                else{  
                 tail.prev.next =null;
                 tail= tail.prev;
 
                 addNode.next =head;
                 head.prev =addNode;
                 head =addNode;
-                
+                }
+
+                hm.put(references[i], addNode);
             }
 
             else{
-                DoublyNode curr =hm.get(references[i]);
 
+                DoublyNode curr =hm.get(references[i]);
+                // Case : IF Refference Node is head itself
+                if(curr == head) continue;
+                
                 if(curr != tail){
                     curr.prev.next = curr.next;
                     curr.next.prev = curr.prev;
@@ -850,16 +879,21 @@ public class LinkedListQuestions {
                 }
 
                 else{
+                    if(curr!=head)
+
                     curr.prev.next =null;
                     tail = curr.prev;
+
                     // if(tail.prev==null){
                     //     tail.prev =curr;
                     // }
                 }
 
                     curr.next = head;
+                    curr.prev=null;
                     head.prev = curr;
                     head =curr;
+
 
             }
         }
@@ -874,5 +908,56 @@ public class LinkedListQuestions {
             System.out.println(curr.data);
             curr=curr.next;
         }
+    }
+
+    // Merge Two Sorted Linked List
+
+    public static Node mergeTwoSortedLinkedList( Node head1 , Node head2){
+        Node newHead = null;
+        Node curr1 = head1, prev1= head1, curr2 = head2, prev2=head2;
+
+        if(head1 != null && head2 !=null){
+            if(curr1.data<= curr2.data){
+                newHead =curr1;
+                curr1=curr1.next;
+                prev1.next =curr2;
+                prev1=curr1;
+            }
+            else{
+                newHead=curr2;
+                curr2=curr2.next;
+                prev2.next =curr1;
+                prev2=curr1;
+            }
+        }
+        else{
+            return head1!=null?head1:head2;
+        }
+
+        while (curr1!=null && curr2!=null) {
+          
+            if(curr1.data<=curr2.data){
+            while (curr1!=null && curr1.data<=curr2.data) {
+                prev1 = curr1;
+                curr1=curr1.next;
+            }
+
+            prev1.next =curr2;
+            }
+       
+            else{
+            while (curr2!=null &&curr2.data<=curr1.data ) {
+                prev2 =curr2;
+                curr2=curr2.next;
+            }
+            prev2.next =curr1;
+        }
+           
+
+        }
+
+        return newHead;
+
+
     }
 }
