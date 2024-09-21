@@ -916,23 +916,23 @@ public class LinkedListQuestions {
         Node newHead = null;
         Node curr1 = head1, prev1= head1, curr2 = head2, prev2=head2;
 
-        if(head1 != null && head2 !=null){
-            if(curr1.data<= curr2.data){
-                newHead =curr1;
-                curr1=curr1.next;
-                prev1.next =curr2;
-                prev1=curr1;
-            }
-            else{
-                newHead=curr2;
-                curr2=curr2.next;
-                prev2.next =curr1;
-                prev2=curr1;
-            }
-        }
-        else{
-            return head1!=null?head1:head2;
-        }
+        // if(head1 != null && head2 !=null){
+        //     if(curr1.data<= curr2.data){
+        //         newHead =curr1;
+        //         curr1=curr1.next;
+        //         prev1.next =curr2;
+        //         prev1=curr1;
+        //     }
+        //     else{
+        //         newHead=curr2;
+        //         curr2=curr2.next;
+        //         prev2.next =curr1;
+        //         prev2=curr1;
+        //     }
+        // }
+        // else{
+        //     return head1!=null?head1:head2;
+        // }
 
         while (curr1!=null && curr2!=null) {
           
@@ -956,7 +956,7 @@ public class LinkedListQuestions {
 
         }
 
-        return newHead;
+        return head1.data>=head2.data?head2:head1;
 
 
     }
